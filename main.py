@@ -13,7 +13,7 @@ def salvar_cadastros (cadastros):
     with open(ARQUIVO_CADASTROS, "w", encoding="utf-8") as arquivo:
               json.dump(cadastros, arquivo, indent=4, ensure_ascii=False)
 
-def carregar_cadastro():
+def carregar_cadastros():
       try:
             with open(ARQUIVO_CADASTROS, "r", encoding="utf-8") as arquivo:
                   return json.load(arquivo)
@@ -36,6 +36,24 @@ def ver_cadastros(cadastros):
       else:
             print("\n----------LISTA DE CADASTROS ==========")
             for i, pessoa in enumerate(cadastros, 1):
-                  print(f"{i}. Nome: {pessoa['Nome']}, Idade: {pessoa['Idade']}, Turma: {pessoa['turma']}, Curso: {pessoa['curso']}")
+                  print(f"{i}. Nome: {pessoa['Nome']}, Idade: {pessoa['Idade']}, Turma: {pessoa['Turma']}, Curso: {pessoa['Curso']}")
       input("\nPressione Enter para voltar ao menu...")
+
+def main():
+      cadastros = carregar_cadastros()
+      while True: 
+            exibir_menu()
+            opcao = input("Escolha uma opção: ")
+            if opcao == "1":
+                  cadastrar_pessoa(cadastros)
+            elif opcao == "2":
+                  ver_cadastros(cadastros)
+            elif opcao == "3":
+                  print("Obrigado por utilizar o sistema de cadastro!")
+                  break
+            else:
+                  print("Opção inválida! Tente novamente.")
+
+if __name__ == "__main__":
+      main()
                 
